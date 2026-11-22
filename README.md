@@ -81,13 +81,120 @@ Custom connectors in Claude on the web and desktop, and ChatGPT, accept only a U
 
 ### Fields
 
-The fields of each capability are documented on the English pages linked below.
+These are the fields that the 5 capabilities returned in our test. Each meaning is the first sentence of the field's entry in the API documentation. The link under each table has the full text.
 
-- `search`: <https://everyinfra.com/en/weibo-api/search?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
-- `post_detail`: <https://everyinfra.com/en/weibo-api/post_detail?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
-- `comments`: <https://everyinfra.com/en/weibo-api/comments?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
-- `profile`: <https://everyinfra.com/en/weibo-api/profile?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
-- `user_posts`: <https://everyinfra.com/en/weibo-api/user_posts?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
+#### `search` (keyword search)
+
+| Field | Meaning |
+|---|---|
+| `id` | The record's unique ID on the platform. |
+| `url` | Link to the record on the platform. |
+| `text` | Body text with HTML removed, returned in full and never cut short (on a few platforms the list results themselves carry only an excerpt; the platform's field notes say so). |
+| `posted_at` | Publish time in ISO 8601, UTC (for example 2026-08-07T12:34:56+00:00). |
+| `device` | Client the post was published from (such as an iPhone client). |
+| `repost_count` | Reposts (as distinct from quote posts). null means not disclosed. |
+| `comment_count` | Comments. null means not disclosed, not 0. |
+| `like_count` | Likes. null means the platform or this capability does not disclose it; it is not 0. |
+| `is_repost` | Whether the post is a repost. |
+| `author_id` | Author's unique ID on the platform. |
+| `author_name` | Author's display name. |
+| `image_urls` | Array of image links in the platform's display order; absent when there are no images. |
+| `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
+| `video_url` | Video link of the post. |
+
+All parameters and fields: <https://everyinfra.com/en/weibo-api/search?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
+
+#### `post_detail` (post details)
+
+| Field | Meaning |
+|---|---|
+| `id` | The record's unique ID on the platform. |
+| `url` | Link to the record on the platform. |
+| `text` | Body text with HTML removed, returned in full and never cut short (on a few platforms the list results themselves carry only an excerpt; the platform's field notes say so). |
+| `posted_at` | Publish time in ISO 8601, UTC (for example 2026-08-07T12:34:56+00:00). |
+| `device` | Client the post was published from (such as an iPhone client). |
+| `repost_count` | Reposts (as distinct from quote posts). null means not disclosed. |
+| `comment_count` | Comments. null means not disclosed, not 0. |
+| `like_count` | Likes. null means the platform or this capability does not disclose it; it is not 0. |
+| `is_repost` | Whether the post is a repost. |
+| `is_long_text` | Whether the post is a long post (post_detail / user_posts). |
+| `author_id` | Author's unique ID on the platform. |
+| `author_name` | Author's display name. |
+| `author_bio` | Author bio. |
+| `author_follower_count` | Number of followers the author has. |
+| `author_following_count` | Number of accounts the author follows. |
+| `author_verified` | Whether the author carries Weibo verification (the V badge). |
+| `author_verified_reason` | Verification description (such as a company role); use it to tell what a verified account represents. |
+| `author_avatar_url` | Author avatar URL. |
+| `image_urls` | Array of image links in the platform's display order; absent when there are no images. |
+| `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
+
+All parameters and fields: <https://everyinfra.com/en/weibo-api/post_detail?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
+
+#### `comments` (comments)
+
+| Field | Meaning |
+|---|---|
+| `id` | The record's unique ID on the platform. |
+| `text` | Body text with HTML removed, returned in full and never cut short (on a few platforms the list results themselves carry only an excerpt; the platform's field notes say so). |
+| `like_count` | Likes. null means the platform or this capability does not disclose it; it is not 0. |
+| `author_id` | Author's unique ID on the platform. |
+| `author_name` | Author's display name. |
+| `author_avatar_url` | Author avatar URL. |
+| `post_id` | Post ID. |
+| `posted_at` | Publish time in ISO 8601, UTC (for example 2026-08-07T12:34:56+00:00). |
+| `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
+
+Other fields that the test returned: `post_url`.
+
+All parameters and fields: <https://everyinfra.com/en/weibo-api/comments?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
+
+#### `profile` (profile or object details)
+
+| Field | Meaning |
+|---|---|
+| `user_id` | User's unique ID on the platform. |
+| `display_name` | Display name; can differ from username. |
+| `url` | Link to the record on the platform. |
+| `bio` | Profile bio written by the account; may contain line breaks and emoji. |
+| `follower_count` | Followers. null means not disclosed, not 0. |
+| `following_count` | Accounts followed. null means not disclosed, not 0. |
+| `post_count` | Total posts. null means not disclosed, not 0. |
+| `is_verified` | Whether the platform verified the account. null means it cannot be determined. |
+| `avatar_url` | Avatar image link. |
+| `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
+
+Other fields that the test returned: `gender` and `cover_image_url`.
+
+All parameters and fields: <https://everyinfra.com/en/weibo-api/profile?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
+
+#### `user_posts` (user content)
+
+| Field | Meaning |
+|---|---|
+| `id` | The record's unique ID on the platform. |
+| `url` | Link to the record on the platform. |
+| `text` | Body text with HTML removed, returned in full and never cut short (on a few platforms the list results themselves carry only an excerpt; the platform's field notes say so). |
+| `posted_at` | Publish time in ISO 8601, UTC (for example 2026-08-07T12:34:56+00:00). |
+| `device` | Client the post was published from (such as an iPhone client). |
+| `repost_count` | Reposts (as distinct from quote posts). null means not disclosed. |
+| `comment_count` | Comments. null means not disclosed, not 0. |
+| `like_count` | Likes. null means the platform or this capability does not disclose it; it is not 0. |
+| `is_repost` | Whether the post is a repost. |
+| `is_long_text` | Whether the post is a long post (post_detail / user_posts). |
+| `author_id` | Author's unique ID on the platform. |
+| `author_name` | Author's display name. |
+| `author_verified` | Whether the author carries Weibo verification (the V badge). |
+| `author_avatar_url` | Author avatar URL. |
+| `image_urls` | Array of image links in the platform's display order; absent when there are no images. |
+| `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
+| `next_page_token` | Page token (user_search, user_posts, topic_search, user_post_search, user_album, collection_videos): pass it back unchanged as page_token for the next page. |
+| `original_post_id` | For a repost, the ID of the original post (post_detail / user_posts); pass it as `url` to post_detail to read the original. |
+| `video_url` | Video link of the post. |
+| `duration_sec` | Video length in seconds (video posts on post_detail / user_posts, and video / collection_videos). |
+| `duration_seconds` | Duration in seconds. null for content that is not video or audio. |
+
+All parameters and fields: <https://everyinfra.com/en/weibo-api/user_posts?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
 
 ### FAQ
 
