@@ -142,10 +142,9 @@ All parameters and fields: <https://everyinfra.com/en/weibo-api/post_detail?utm_
 | `author_name` | Author's display name. |
 | `author_avatar_url` | Author avatar URL. |
 | `post_id` | Post ID. |
+| `post_url` | Post link. |
 | `posted_at` | Publish time in ISO 8601, UTC (for example 2026-08-07T12:34:56+00:00). |
 | `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
-
-Other fields that the test returned: `post_url`.
 
 All parameters and fields: <https://everyinfra.com/en/weibo-api/comments?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
 
@@ -157,14 +156,14 @@ All parameters and fields: <https://everyinfra.com/en/weibo-api/comments?utm_sou
 | `display_name` | Display name; can differ from username. |
 | `url` | Link to the record on the platform. |
 | `bio` | Profile bio written by the account; may contain line breaks and emoji. |
+| `gender` | Gender. |
 | `follower_count` | Followers. null means not disclosed, not 0. |
 | `following_count` | Accounts followed. null means not disclosed, not 0. |
 | `post_count` | Total posts. null means not disclosed, not 0. |
 | `is_verified` | Whether the platform verified the account. null means it cannot be determined. |
 | `avatar_url` | Avatar image link. |
+| `cover_image_url` | Cover image. |
 | `platform` | Source platform identifier, the same as platform in the request (for example xiaohongshu, tiktok). |
-
-Other fields that the test returned: `gender` and `cover_image_url`.
 
 All parameters and fields: <https://everyinfra.com/en/weibo-api/profile?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
 
@@ -407,7 +406,7 @@ Claude 网页版和桌面版的自定义连接器、ChatGPT 只能填网址：�
 | `gender` | 性别。 |
 | `follower_count` | 粉丝数。 |
 | `following_count` | 关注数。 |
-| `post_count` | 发布内容总数。 |
+| `post_count` | 这个用户发过的微博数（likers、following_list、followers_list）。 |
 | `is_verified` | 是否为平台认证账号（蓝V等）。 |
 | `avatar_url` | 头像图片链接。 |
 | `cover_image_url` | 封面图。 |
@@ -438,7 +437,7 @@ Claude 网页版和桌面版的自定义连接器、ChatGPT 只能填网址：�
 | `next_page_token` | 翻页令牌（user_search、user_posts、topic_search、user_post_search、user_album、collection_videos）：作为下一次请求的 page_token 原样传回取下一页；同一页每行的值相同，响应顶层也有同一个 next_page_token。 |
 | `original_post_id` | 转发微博时，被转发的原微博 ID（post_detail / user_posts）；可作为 post_detail 的 url 传入读原微博。 |
 | `video_url` | 视频链接；不是视频微博时没有。 |
-| `duration_sec` | 视频时长（秒；post_detail、user_posts、video、collection_videos 的视频微博）。 |
+| `duration_sec` | 视频时长（秒；post_detail、user_posts、video、collection_videos、video_feed 的视频微博）。 |
 | `duration_seconds` | 时长，单位秒。 |
 
 完整参数和字段：<https://everyinfra.com/weibo-api/user_posts?utm_source=github&utm_medium=example_repo&utm_campaign=weibo-api>
